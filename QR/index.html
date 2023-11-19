@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulario de Contacto QR</title>
+    <link rel="stylesheet" href="main.css">
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <!-- Animación -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Animación CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <!-- Libreria QR -->
+    <script src="./qrcode.min.js"></script>
+</head>
+<body>
+    
+    <div class="content">
+
+        <h1 class="logo">Formulario de <span>Contacto</span></h1>
+
+        <div class="contact-wrapper animated bounceInUp">
+            <div class="contact-form">
+                <h3>Contacto</h3>
+                <form id="contactForm">
+                    <p>
+                        <label>Nombre</label>
+                        <input type="text" name="Nombre">
+                    </p>
+                    <p>
+                        <label>Apellido</label>
+                        <input type="text" name="Apellido">
+                    </p>
+                    <p>
+                        <label>Correo</label>
+                        <input type="email" name="Correo">
+                    </p>
+                    <p>
+                        <label>Número</label>
+                        <input type="tel" name="Numero">
+                    </p>
+                    <p>
+                        <label>Compañia</label>
+                        <input type="text" name="Compañia">
+                    </p>
+                    <p class="block">
+                        <label>Mensaje</label> 
+                        <textarea name="Mensaje" rows="3"></textarea>
+                    </p>
+                    <p class="block">
+                        <button type="button" onclick="generateVCardQRCode()">Generar Código QR</button>
+                    </p>
+                </form>
+            </div>
+            <div class="contact-info">
+               <h4>Escáneame</h4>
+                
+        <div id="qrcode"></div>
+
+                <script>
+                    function generateVCardQRCode() {
+                        
+                        var formData = document.getElementById('contactForm');
+                        var vCardData = "BEGIN:VCARD\n" +
+                                        "VERSION:3.0\n" +
+                                        "NM:" + formData.Nombre.value + "\n" +
+                                        "AP:" + formData.Apellido.value + "\n" +
+                                        "EM:" + formData.Correo.value + "\n" +
+                                        "TEL:" + formData.Numero.value + "\n" +
+                                        "ORG:" + formData.Compañia.value + "\n" +
+                                        "NOTE:" + formData.Mensaje.value + "\n" +
+                                        "END:VCARD";
+        
+                        // Código QR
+                        var qrcode = new QRCode(document.getElementById("qrcode"), {
+                            text: vCardData,
+                            width: 200,
+                            height: 200  
+                            
+                        });
+                        
+                        
+                    }
+                </script>
+
+            </div>
+       
+</body>
+</html>
